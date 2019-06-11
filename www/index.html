@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+
+  <script src="components/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script src="components/scanner.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+  
+</head>
+<body>
+  
+  <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+    
+      <ons-splitter>
+        <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+          <ons-page>
+            <ons-list>
+              <ons-list-item onclick="fn.load('home.html')" tappable>
+                Home
+              </ons-list-item>
+              <ons-list-item onclick="fn.load('settings.html')" tappable>
+                Settings
+              </ons-list-item>
+              <ons-list-item onclick="fn.load('about.html')" tappable>
+                About
+              </ons-list-item>
+            </ons-list>
+          </ons-page>
+        </ons-splitter-side>
+        <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+      </ons-splitter>
+
+
+
+
+  <template id="page1.html">
+    <ons-page id="page1">
+      <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Main
+      </div>
+    </ons-toolbar>
+      <!-- Lista de itens -->
+
+      <div style="text-align: center; margin-top: 5px">
+          <h2> Produtos Cadastrados </h2>
+      </div>
+
+      <!-- <ons-button id="add">Add</ons-button>
+      <ons-button id="produtos">Produtos</ons-button> -->
+
+      <div style="text-align: center; margin-top: 30px;">
+        <p>
+          <!-- Input produto -->
+          <ons-input id="nome" modifier="underbar" placeholder="Nome do Produto"></ons-input>
+        </p>
+        <p>
+          <!-- Input código de barras -->
+          <ons-input id="barra" modifier="underbar" placeholder="Cógido de barras"></ons-input>
+        </p>
+        <p>
+          <!-- Input valor -->
+          <ons-input id="valor" modifier="underbar" placeholder="Valor"></ons-input>
+        </p>
+        <p>
+          <!-- Input descrição geral -->
+          <ons-input id="descricao" modifier="underbar" placeholder="Descrição geral"></ons-input>
+        </p>
+        <p>
+          <!-- Input processador -->
+          <ons-input id="processador" modifier="underbar" placeholder="Processador"></ons-input>
+        </p>
+        <p>
+          <!-- Input sistema operacional -->
+          <ons-input id="sistema" modifier="underbar" placeholder="Sistema operacional"></ons-input>
+        </p>
+        <p>
+          <!-- Input tamanho da tela -->
+          <ons-input id="tela" modifier="underbar" placeholder="Tamanho da tela"></ons-input>
+        </p>
+        <p>
+          <!-- Input tecnologia wi-fi -->
+          <ons-input id="wifi" modifier="underbar" placeholder="Tecnologia Wi-Fi: (Sim/não)"></ons-input>
+        </p>
+        <p>
+          <!-- Input quantidade de câmeras -->
+          <ons-input id="camera" modifier="underbar" placeholder="Quantidade de câmeras:"></ons-input>
+        </p>
+        <p>
+          <!-- Input respectivas resolução das câmeras -->
+          <ons-input id="resolucao" modifier="underbar" placeholder="Respectivas Resolução das câmeras:"></ons-input>
+        </p>
+        <p>
+          <!-- Input memoria flash -->
+          <ons-input id="memoria" modifier="underbar" placeholder="Memória Flash:"></ons-input>
+        </p>    
+        
+        <p style="margin-top: 30px;">
+          <ons-button style="background-color: red;" id="push-button"> Listar </ons-button>
+        </p>
+      </div>
+      <ons-fab position="bottom right"><i class="zmdi zmdi-view-week"></i></ons-fab>
+    </ons-page>
+  </template>
+
+  <template id="page2.html">
+    <ons-page id="page2">
+      <ons-toolbar>  <!-- Início Barra de tarefas -->
+          <div class="left"><ons-back-button>Home</ons-back-button></div>
+        </ons-toolbar> <!-- Fim Barra de tarefas -->
+
+        <div style="text-align: center; margin-top: 20%;">
+          
+          <p>
+          <!-- Input produto -->
+          <ons-input id="codigo" modifier="underbar" placeholder="Código do Produto"></ons-input>
+          </p>
+          <p>
+          <!-- Input produto -->
+          <ons-input id="nome1" modifier="underbar" placeholder="Nome do Produto"></ons-input>
+          </p>
+          <p>
+            <!-- Input código de barras -->
+            <ons-input id="barra1" modifier="underbar" placeholder="Cógido de barras"></ons-input>
+          </p>
+          <p>
+            <!-- Input valor -->
+            <ons-input id="valor1" modifier="underbar" placeholder="Valor"></ons-input>
+          </p>
+          <p>
+            <!-- Input descrição geral -->
+            <ons-input id="descricao1" modifier="underbar" placeholder="Descrição geral"></ons-input>
+          </p>
+          <p>
+            <!-- Input processador -->
+            <ons-input id="processador1" modifier="underbar" placeholder="Processador"></ons-input>
+          </p>
+          <p>
+            <!-- Input sistema operacional -->
+            <ons-input id="sistema1" modifier="underbar" placeholder="Sistema operacional"></ons-input>
+          </p>
+          <p>
+            <!-- Input tamanho da tela -->
+            <ons-input id="tela1" modifier="underbar" placeholder="Tamanho da tela"></ons-input>
+          </p>
+          <p>
+            <!-- Input tecnologia wi-fi -->
+            <ons-input id="wifi1" modifier="underbar" placeholder="Tecnologia Wi-Fi: (Sim/não)"></ons-input>
+          </p>
+          <p>
+            <!-- Input quantidade de câmeras -->
+            <ons-input id="camera1" modifier="underbar" placeholder="Quantidade de câmeras:"></ons-input>
+          </p>
+          <p>
+            <!-- Input respectivas resolução das câmeras -->
+            <ons-input id="resolucao1" modifier="underbar" placeholder="Respectivas Resolução das câmeras:"></ons-input>
+          </p>
+          <p>
+            <!-- Input memoria flash -->
+            <ons-input id="memoria1" modifier="underbar" placeholder="Memória Flash:"></ons-input>
+          </p>
+          <p style="margin-top: 30px;">
+            <ons-button id="salvar" style="background-color: #5ACF4E; margin: 10px;"><i class="zmdi zmdi-check-circle"></i></ons-button>
+
+            <ons-button id="editar" style="background-color: #F0C120; margin: 10px;"><i class="zmdi zmdi-edit"></i></ons-button>
+
+            <ons-button id="deletar" style="background-color: #DC4C4C; margin: 10px;"><i class="zmdi zmdi-delete"></i></ons-button>
+
+            <ons-button id="cancelar" style="background-color: #8C8C8C; margin: 10px;" ><i class="zmdi zmdi-close-circle"></i></ons-button>
+          </p>
+        </div>
+    </ons-page>
+  </template>
+
+  <script>
+      window.fn = {};
+
+      window.fn.open = function() {
+        var menu = document.getElementById('menu');
+        menu.open();
+      };
+
+      window.fn.load = function(page) {
+        var content = document.getElementById('content');
+        var menu = document.getElementById('menu');
+        content.load(page)
+          .then(menu.close.bind(menu));
+      };
+
+    document.addEventListener('init', function(event) {
+      var page = event.target;
+
+      if (page.id === 'page1') {
+        page.querySelector('#push-button').onclick = function() {
+          document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'Listar'}});
+        };
+      } else if (page.id === 'page2') {
+        page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+        //Listar Pessoas
+        $(document).ready(function(){
+          desabilita();
+          listaPessoas();
+          listarPessoas();
+        });
+      }
+    });
+    
+
+
+  </script>
+</body>
+</html>
