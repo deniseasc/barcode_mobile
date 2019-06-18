@@ -33,6 +33,7 @@
       {
         $(document).ready(function(){
           desabilitaa();
+          listarProdutos();
         });
       }
     });
@@ -117,7 +118,7 @@
         </p>
         <p>
           <!-- Input quantidade de câmeras -->
-          <ons-input id="camera" modifier="underbar" placeholder="Quantidade de câmeras:"></ons-input>
+          <ons-input id="cameras" modifier="underbar" placeholder="Quantidade de câmeras:"></ons-input>
         </p>
         <p>
           <!-- Input respectivas resolução das câmeras -->
@@ -132,7 +133,7 @@
           <ons-button id="cadastrar">Cadastrar</ons-button>
         </p>    
       </div>
-      <ons-fab id="barcode" position="bottom right"><i class="zmdi zmdi-view-week"></i></ons-fab>
+      <ons-fab id="barcode" position="bottom left"><i class="zmdi zmdi-view-week"></i></ons-fab>
     </ons-page>
   </template>
 
@@ -149,11 +150,11 @@
           </div>
         </ons-toolbar>
 
-        <div style="text-align: center; margin-top: 5%;">   
+        <div style="text-align: center; margin-top: 10%;">   
           
-          <ons-select id="lista" onchange="editSelects(event)">
-       
-         </ons-select>
+          <p>
+            <select name="" id="lista"></select>
+          </p>
          <p>
           <!-- Input produto -->
           <ons-input id="codigo1" modifier="underbar" placeholder="Código do Produto"></ons-input>
