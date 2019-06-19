@@ -1,8 +1,8 @@
 //Função para abrir o plugin de leitor de codigo de barras
-function scanBarcode(){
-  window.plugins.barcodeScanner.scan( function(result) 
+function scanbarcodeweb(){
+  window.plugins.barcodewebScanner.scan( function(result) 
   {
-    alert("We got a barcode\n" +
+    alert("We got a barcodeweb\n" +
       "Result: " + result.text + "\n" +
       "Format: " + result.format + "\n" +
       "Cancelled: " + result.cancelled);
@@ -10,13 +10,12 @@ function scanBarcode(){
   }, 
   function(error)
   {
-
     alert("Scanning failed: " + error);
   });
 }
 
-$(document).on('click','#barcode',function(){
-  scanBarcode();
+$(document).on('click','#barcodeweb',function(){
+  scanbarcodeweb();
   habilita();
 });
 
@@ -31,15 +30,14 @@ $(document).on("click","#cadastrar",function(){
       "sistema": $("#sistema").val(),
       "tela": $("#tela").val(),
       "wifi": $("#wifi").val(),
-      "cameras": $("#cameras").val(),
+      "camera": $("#camera").val(),
       "resolucao": $("#resolucao").val(),
       "memoria": $("#memoria").val()
     };
-    
 
     $.ajax({
       type:"post", //como enviar
-      url:"https://bd-barcode-soaresmju.c9users.io/cadastra.php", //para onde enviar
+      url:"https://barcodeweb-soaresmju.c9users.io/cadastra.php", //para onde enviar
       data:parametros, //o que enviar
       //se der certo
       success: function(data){
@@ -69,12 +67,12 @@ $(document).on("click","#cadastrar",function(){
 function listarProdutos(){
   $.ajax({
       type:"post", //como enviar
-      url:"https://bd-barcode-soaresmju.c9users.io/listar.php", //para onde enviar
+      url:"https://barcodeweb-soaresmju.c9users.io/listar.php", //para onde enviar
       dataType:"json",
       //se der certo
       success: function(data){
         var itemLista = "";
-        $.each(data.celular,function(i,dados){                                                                                              
+        $.each(data.celular,function(i,dados){
           itemLista += "<option value='"+dados.codigo+"'>"+dados.nome+"</option>";
         });
         $("#lista").html(itemLista);
@@ -87,12 +85,13 @@ function listarProdutos(){
 }
 // Listar
 
+// Lista
 // Lista1
 $(document).on("change","#lista",function(){
     var codigoescolhido = $("option:selected", ("#lista")).val();
     $.ajax({
         type:"get", //como enviar
-        url:"https://bd-barcode-soaresmju.c9users.io/listarum.php",//para onde enviar
+        url:"https://barcodeweb-soaresmju.c9users.io/listarum.php",//para onde enviar
         data:"id="+codigoescolhido,
         dataType:"json",
         //se der certo
@@ -136,8 +135,8 @@ $(document).on("click","#salvar",function(){
     };
 
     $.ajax({
-        type:"get", //como enviar
-        url:"https://bd-barcode-soaresmju.c9users.io/update.php",//para onde enviar
+        type:"post", //como enviar
+        url:"https://barcodeweb-soaresmju.c9users.io/update.php",//para onde enviar
         data:parametros,//o que enviar
         //se der certo
         success: function(data){
@@ -152,11 +151,11 @@ $(document).on("click","#salvar",function(){
 });
 //Update
 //delete
-$(document).on("click","#excluir",function(){
+$(document).on("click","#deletar",function(){
     $.ajax({
         type:"get", //como enviar
-        url:"https://bd-barcode-soaresmju.c9users.io/delete.php",//para onde enviar
-        data:"id="+$("#codigo").val(),
+        url:"https://barcodeweb-soaresmju.c9users.io/delete.php",//para onde enviar
+        data:"id="+$("#codigo1").val(),
         //se der certo
         success: function(data){
             navigator.notification.alert(data);
@@ -169,6 +168,7 @@ $(document).on("click","#excluir",function(){
     }); 
 });
 //delete
+
 function habilita(){
   $("#nome").prop("disabled",false);
   $("#valor").prop("disabled",false);
@@ -223,10 +223,9 @@ function desabilitaa(){
   document.getElementById("memoria1").disabled = true;
 }
 
+
 function habilitaa(){
-  $("#codigo1").prop("disabled",false);
   $("#nome1").prop("disabled",false);
-  $("#barra1").prop("disabled",false);
   $("#valor1").prop("disabled",false);
   $("#descricao1").prop("disabled",false);
   $("#processador1").prop("disabled",false);
