@@ -1,8 +1,8 @@
 //Função para abrir o plugin de leitor de codigo de barras
-function scanBarcode(){
-  window.plugins.barcodeScanner.scan( function(result) 
+function scanbarcodeweb(){
+  window.plugins.barcodewebScanner.scan( function(result) 
   {
-    alert("We got a barcode\n" +
+    alert("We got a barcodeweb\n" +
       "Result: " + result.text + "\n" +
       "Format: " + result.format + "\n" +
       "Cancelled: " + result.cancelled);
@@ -14,8 +14,8 @@ function scanBarcode(){
   });
 }
 
-$(document).on('click','#barcode',function(){
-  scanBarcode();
+$(document).on('click','#barcodeweb',function(){
+  scanbarcodeweb();
   habilita();
 });
 
@@ -37,7 +37,7 @@ $(document).on("click","#cadastrar",function(){
 
     $.ajax({
       type:"post", //como enviar
-      url:"https://barcode-web-yohannan.c9users.io/cadastra.php", //para onde enviar
+      url:"https://barcodeweb-soaresmju.c9users.io/cadastra.php", //para onde enviar
       data:parametros, //o que enviar
       //se der certo
       success: function(data){
@@ -50,7 +50,7 @@ $(document).on("click","#cadastrar",function(){
         $("#sistema").val("");
         $("#tela").val("");
         $("#wifi").val("");
-        $("#camera").val("");
+        $("#cameras").val("");
         $("#resolucao").val("");
         $("#memoria").val("");
       },
@@ -67,15 +67,15 @@ $(document).on("click","#cadastrar",function(){
 function listarProdutos(){
   $.ajax({
       type:"post", //como enviar
-      url:"https://barcode-web-yohannan.c9users.io/listar.php", //para onde enviar
+      url:"https://barcodeweb-soaresmju.c9users.io/listar.php", //para onde enviar
       dataType:"json",
       //se der certo
       success: function(data){
         var itemLista = "";
-        $.each(data.produtos,function(i,dados){
+        $.each(data.celular,function(i,dados){
           itemLista += "<option value='"+dados.codigo+"'>"+dados.nome+"</option>";
         });
-        $("#listar").html(itemLista);
+        $("#lista").html(itemLista);
   },
   // se der errado
   error: function(data){
@@ -86,41 +86,57 @@ function listarProdutos(){
 // Listar
 
 // Lista
-function listaProdutos(){
-  $.ajax({
-      type:"post", //como enviar
-      url:"https://barcode-web-service-yohannan.c9users.io/listar.php", //para onde enviar
-      dataType:"json",
-      //se der certo
-      success: function(data){
-        var itemLista = "";
-        $.each(data.produtos,function(i,dados){
-          itemLista += "<ons-list-item value='"+dados.codigo+"'>"+dados.nome+"</ons-list-item>";
-        });
-        $("#lista").html(itemLista);
-  },
-  // se der errado
-  error: function(data){
-    navigator.notification.alert(data);
-  }
-  });
-}
-// Lista
+// Lista1
+$(document).on("change","#lista",function(){
+    var codigoescolhido = $("option:selected", ("#lista")).val();
+    $.ajax({
+        type:"get", //como enviar
+        url:"https://barcodeweb-soaresmju.c9users.io/listarum.php",//para onde enviar
+        data:"id="+codigoescolhido,
+        dataType:"json",
+        //se der certo
+        success: function(data){
+            $("#codigo1").val(data.celular.codigo);
+            $("#nome1").val(data.celular.nome);
+            $("#barra1").val(data.celular.barra);
+            $("#valor1").val(data.celular.valor);
+            $("#descricao1").val(data.celular.descricao);
+            $("#processador1").val(data.celular.processador);
+            $("#sistema1").val(data.celular.sistema);
+            $("#tela1").val(data.celular.tela);
+            $("#wifi1").val(data.celular.wifi);
+            $("#camera1").val(data.celular.cameras);
+            $("#resolucao1").val(data.celular.resolucao);
+            $("#memoria1").val(data.celular.memoria);
+        },
+        //se der errado
+        error: function(data){
+             navigator.notification.alert(data);
+        }
+    });    
+}); 
+// Lista1
 
 //Update
 $(document).on("click","#salvar",function(){
    var parametros = {
-        "codigo": $("#codigo").val(),
-        "barra": $("#barra1").val(),
-        "marca": $("#marca1").val(),
+        "codigo": $("#codigo1").val(),
         "nome": $("#nome1").val(),
-        "tamanho": $("#tamanho1").val(),
-        "descricao": $("#descricao1").val()
+        "barra": $("#barra1").val(),
+        "valor": $("#valor1").val(),
+        "descricao": $("#descricao1").val(),
+        "processador": $("#processador1").val(),
+        "sistema": $("#sistema1").val(),
+        "tela": $("#tela1").val(),
+        "wifi": $("#wifi1").val(),
+        "cameras": $("#camera1").val(),
+        "resolucao": $("#resolucao1").val(),
+        "memoria": $("#memoria1").val()
     };
 
     $.ajax({
-        type:"get", //como enviar
-        url:"https://barcode-web-service-yohannan.c9users.io/update.php",//para onde enviar
+        type:"post", //como enviar
+        url:"https://barcodeweb-soaresmju.c9users.io/update.php",//para onde enviar
         data:parametros,//o que enviar
         //se der certo
         success: function(data){
@@ -134,6 +150,24 @@ $(document).on("click","#salvar",function(){
     }); 
 });
 //Update
+//delete
+$(document).on("click","#deletar",function(){
+    $.ajax({
+        type:"get", //como enviar
+        url:"https://barcodeweb-soaresmju.c9users.io/delete.php",//para onde enviar
+        data:"id="+$("#codigo1").val(),
+        //se der certo
+        success: function(data){
+            navigator.notification.alert(data);
+            location.reload();//recarrega a pagina
+        },
+        //se der errado
+        error: function(data){
+             navigator.notification.alert(data);
+        }
+    }); 
+});
+//delete
 
 function habilita(){
   $("#nome").prop("disabled",false);
@@ -143,7 +177,7 @@ function habilita(){
   $("#sistema").prop("disabled",false);
   $("#tela").prop("disabled",false);
   $("#wifi").prop("disabled",false);
-  $("#camera").prop("disabled",false);
+  $("#cameras").prop("disabled",false);
   $("#resolucao").prop("disabled",false);
   $("#memoria").prop("disabled",false);
 }
@@ -158,7 +192,7 @@ function desabilita(){
   $("#sistema").prop("disabled",true);
   $("#tela").prop("disabled",true);
   $("#wifi").prop("disabled",true);
-  $("#camera").prop("disabled",true);
+  $("#cameras").prop("disabled",true);
   $("#resolucao").prop("disabled",true);
   $("#memoria").prop("disabled",true);
 }
@@ -190,9 +224,7 @@ function desabilitaa(){
 }
 
 function habilitaa(){
-  $("#codigo1").prop("disabled",false);
   $("#nome1").prop("disabled",false);
-  $("#barra1").prop("disabled",false);
   $("#valor1").prop("disabled",false);
   $("#descricao1").prop("disabled",false);
   $("#processador1").prop("disabled",false);
