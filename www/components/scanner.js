@@ -223,6 +223,7 @@ function desabilitaa(){
   document.getElementById("memoria1").disabled = true;
 }
 
+
 function habilitaa(){
   $("#nome1").prop("disabled",false);
   $("#valor1").prop("disabled",false);
